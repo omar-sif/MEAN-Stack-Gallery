@@ -1,0 +1,35 @@
+.gallery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .upload-container {
+    margin-bottom: 20px;
+  }
+  
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .image-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .image-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .actions {
+    margin-top: 10px;
+  }
+  
+  .actions button {
+    margin-right: 10px;
+  }

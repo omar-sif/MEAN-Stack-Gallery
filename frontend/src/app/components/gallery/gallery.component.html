@@ -1,1 +1,15 @@
-<p>gallery works!</p>
+<div class="gallery-container">
+    <div class="upload-container">
+      <input type="file" (change)="onFileChange($event)" />
+      <button (click)="uploadImage()">Upload</button>
+    </div>
+  
+    <div class="image-grid">
+      <div class="image-card" *ngFor="let image of images">
+        <img [src]="getImageUrl(image.filePath)" alt="User Image" />
+        <div class="actions">
+          <button (click)="downloadImage(image)">Download</button>
+        </div>
+      </div>
+    </div>
+  </div>

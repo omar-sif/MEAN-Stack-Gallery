@@ -58,7 +58,7 @@ export class SigninComponent {
             
               this.flashService.setFlashMessage('success', 'Logged in Successfully');
               this.router.navigate(['/gallery']);
-              this.signinService.storeUser(res.token , user.username)
+              this.signinService.storeUser(res.token , res.expiresIn, user.username)
             
             
           },

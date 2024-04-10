@@ -3,11 +3,12 @@ import { RouterModule } from '@angular/router';
 import { FlashMessage, FlashService } from '../../services/flash.service';
 import { Router } from '@angular/router';
 import { SigninService } from '../../services/signin.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
@@ -31,7 +32,9 @@ export class NavbarComponent {
     this.signinService.logout();
     this.flashService.setFlashMessage('success', 'You have been logged out ');            
   }
-
+  isLogged(): boolean {
+    return this.signinService.isLoggedIn();
+  }
   }
 
 
