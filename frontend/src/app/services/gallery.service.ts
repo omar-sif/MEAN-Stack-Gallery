@@ -8,18 +8,16 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class GalleryService {
   private apiUrl = 'http://localhost:8000/gallery';
-  private imageBaseUrl = '/images/';
 
   constructor(private http: HttpClient) {}
 
   getImages(): Observable<any[]> {
     const headers = this.getAuthHeaders();
-    console.log(headers)
     return this.http.get<any[]>(this.apiUrl, { headers });
   }
 
   getImageUrl(filePath: string): string {
-    return `${this.imageBaseUrl}${filePath}`;
+    return `http://localhost:8000/images/${filePath}`;
   }
 
   uploadImage(image: File): Observable<any> {

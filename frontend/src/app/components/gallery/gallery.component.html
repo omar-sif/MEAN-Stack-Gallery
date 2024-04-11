@@ -4,12 +4,10 @@
       <button (click)="uploadImage()">Upload</button>
     </div>
   
-    <div class="image-grid">
-      <div class="image-card" *ngFor="let image of images">
-        <img [src]="getImageUrl(image.filePath)" alt="User Image" />
-        <div class="actions">
-          <button (click)="downloadImage(image)">Download</button>
-        </div>
+    <div class="gallery-container">
+      <div class="gallery-item" *ngFor="let image of images">
+        <img [src]="getImageUrl(image.path)" [alt]="image.alt" />
       </div>
     </div>
+
   </div>
