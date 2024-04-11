@@ -1,30 +1,80 @@
-.gallery-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .upload-container {
-    margin-bottom: 20px;
-  }
-  
-  .gallery-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
-  }
+.upload-container {
+  margin-bottom: 20px;
+}
 
-  .gallery-item img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .actions {
-    margin-top: 10px;
-  }
-  
-  .actions button {
-    margin-right: 10px;
-  }
+.upload-container input[type="file"] {
+  display: none;
+}
+
+.upload-container button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upload-container button:hover {
+  background-color: #2980b9;
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.2s;
+}
+
+.gallery-item img:hover {
+  transform: scale(1.05);
+}
+.upload-container input[type="file"] {
+  display: inline-block; /* Change display property to inline-block or another suitable value */
+}
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.2s;
+}
+
+.gallery-item:hover .download-button {
+  opacity: 1;
+  transform: translateY(-50%);
+}
+
+.download-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.5); /* Transparent background */
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.download-button:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* Darken on hover */
+}
+

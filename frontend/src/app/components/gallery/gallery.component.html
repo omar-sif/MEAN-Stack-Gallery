@@ -1,13 +1,14 @@
-<div class="gallery-container">
-    <div class="upload-container">
-      <input type="file" (change)="onFileChange($event)" />
-      <button (click)="uploadImage()">Upload</button>
-    </div>
-  
-    <div class="gallery-container">
-      <div class="gallery-item" *ngFor="let image of images">
-        <img [src]="getImageUrl(image.path)" [alt]="image.alt" />
-      </div>
-    </div>
-
+<div class="upload-container">
+  <input type="file" (change)="onFileChange($event)" />
+  <button (click)="uploadImage($event)">Upload</button>
+  <div *ngIf="uploadProgress !== null">
+    Upload progress: {{ uploadProgress }}%
   </div>
+</div>
+
+<div class="gallery-container">
+  <div class="gallery-item" *ngFor="let image of images">
+    <img [src]="getImageUrl(image.path)" alt="image.alt" />
+    <button class="download-button" (click) ="downloadImage(image.path)">Download</button>
+  </div>
+</div>

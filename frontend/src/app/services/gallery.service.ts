@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class GalleryService {
   private apiUrl = 'http://localhost:8000/gallery';
+  private uploadProgress$ = new Subject<number>();
 
   constructor(private http: HttpClient) {}
 
@@ -20,17 +21,26 @@ export class GalleryService {
     return `http://localhost:8000/images/${filePath}`;
   }
 
-  uploadImage(image: File): Observable<any> {
-
+  uploadImage(image: File): Observable<{ path: string }> {
     const headers = this.getAuthHeaders();
     const formData = new FormData();
     formData.append('image', image);
-    return this.http.post<any>(this.apiUrl, formData, {headers});
-  }
-  downloadImage(filePath: string): void {
 
-    const imageUrl = this.getImageUrl(filePath);
-    window.open(imageUrl, '_blank');
+    return this.http.post<{ path: string }>(this.apiUrl, formData, {headers} ).pipe(
+      tap((response) => {
+        this.uploadProgress$.next(100); // Notify 100% progress on successful upload
+      })
+    );
+  }
+
+  getUploadProgress$() {
+    return this.uploadProgress$.asObservable();
+  }
+  downloadImage(filePath: string): Observable<Blob> {
+    const headers = this.getAuthHeaders();
+    const url = `${this.apiUrl}/download?path=${encodeURIComponent('/'+filePath)}`;
+    console.log(url);
+    return this.http.get(url, { responseType: 'blob' , headers});
   }
 
   private getAuthHeaders(): HttpHeaders {
